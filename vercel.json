@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/routines/:path(.*)",
+      "destination": "https://jgeschwendt.github.io/routines/:path"
+    },
+    {
+      "source": "/sandman/:path(.*)",
+      "destination": "https://jgeschwendt.github.io/sandman/:path"
+    },
+    { "source": "/stele/:path(.*)", "destination": "https://jgeschwendt.github.io/stele/:path" },
+    { "source": "/ui/:path(.*)", "destination": "https://jgeschwendt.github.io/ui/:path" }
+  ],
+  "trailingSlash": true
+}

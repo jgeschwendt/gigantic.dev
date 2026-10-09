@@ -1,0 +1,46 @@
+/* site.css — this page's shell only. Components and tokens are ui.css's
+   (vendored, byte-synced from jgeschwendt/ui — see AGENTS.md). */
+
+.site-card,
+.site-list .listrow {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-foot {
+  font-size: var(--ui-text-xs);
+  padding-bottom: 3rem;
+}
+
+.site-grid {
+  --ui-grid-min: 220px;
+}
+
+.site-list {
+  max-width: 40rem;
+}
+
+.site-mast {
+  gap: var(--ui-space-1);
+  padding: 3rem 0 1rem;
+}
+
+.site-section {
+  margin-top: 2.5rem;
+}
+
+.site-section > .eyebrow {
+  margin-bottom: 0.75rem;
+}
+
+.site-shell {
+  padding-bottom: 3rem;
+}
+
+.site-wordmark {
+  color: var(--ui-accent);
+  font-size: clamp(2.75rem, 9vw, 5rem);
+  font-weight: var(--ui-weight-bold);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
