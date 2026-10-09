@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@jlg/oxfmt": "0.1.1",
+    "@types/node": "24.19.2",
     "oxfmt": "0.72.0"
   },
   "trustedDependencies": [

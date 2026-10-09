@@ -8,50 +8,131 @@
     <!-- ui.css is vendored byte-synced from jgeschwendt/ui (ui.css @ 162e78b) — sync, never edit here -->
     <link rel="stylesheet" href="/ui.css" />
     <link rel="stylesheet" href="/site.css" />
+    <link rel="stylesheet" href="/rail.css" />
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%23476349'/%3E%3Crect x='3' y='9' width='2.5' height='4' rx='0.5' fill='white'/%3E%3Crect x='6.75' y='6' width='2.5' height='7' rx='0.5' fill='white'/%3E%3Crect x='10.5' y='3' width='2.5' height='10' rx='0.5' fill='white'/%3E%3C/svg%3E"
     />
   </head>
   <body data-page="home">
-    <svg xmlns="http://www.w3.org/2000/svg" style="display: none" aria-hidden="true">
-      <!-- Phosphor Icons (regular), MIT (c) 2023 Phosphor Icons — via jgeschwendt/ui icons/ -->
-      <symbol id="ph-circle-half" viewBox="0 0 256 256" fill="currentColor">
-        <path
-          d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,16.37a86.4,86.4,0,0,1,16,3V212.67a86.4,86.4,0,0,1-16,3Zm32,9.26a87.81,87.81,0,0,1,16,10.54V195.83a87.81,87.81,0,0,1-16,10.54ZM40,128a88.11,88.11,0,0,1,80-87.63V215.63A88.11,88.11,0,0,1,40,128Zm160,50.54V77.46a87.82,87.82,0,0,1,0,101.08Z"
-        />
-      </symbol>
-      <symbol id="ph-moon" viewBox="0 0 256 256" fill="currentColor">
-        <path
-          d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"
-        />
-      </symbol>
-      <symbol id="ph-sun" viewBox="0 0 256 256" fill="currentColor">
-        <path
-          d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"
-        />
-      </symbol>
-    </svg>
-
-    <header class="appbar">
-      <span class="appbar-title">gigantic.dev</span>
-      <nav class="appbar-nav" aria-label="elsewhere">
-        <a class="pill" href="https://jlg.io">jlg.io</a>
-        <a class="pill" href="https://github.com/jgeschwendt">github</a>
-      </nav>
-      <span class="spacer"></span>
-      <div class="segmented" role="group" aria-label="theme">
-        <button type="button" data-theme-set="light" aria-pressed="false" title="light">
-          <svg class="icon icon-sm" aria-hidden="true"><use href="#ph-sun" /></svg>light
-        </button>
-        <button type="button" data-theme-set="auto" aria-pressed="true" title="follow the system">
-          <svg class="icon icon-sm" aria-hidden="true"><use href="#ph-circle-half" /></svg>auto
-        </button>
-        <button type="button" data-theme-set="dark" aria-pressed="false" title="dark">
-          <svg class="icon icon-sm" aria-hidden="true"><use href="#ph-moon" /></svg>dark
+    <nav class="rail" aria-label="projects">
+      <svg xmlns="http://www.w3.org/2000/svg" style="display: none" aria-hidden="true">
+        <!-- Phosphor Icons (regular), MIT (c) 2023 Phosphor Icons — via jgeschwendt/ui icons/ -->
+        <symbol id="rail-circle-half" viewBox="0 0 256 256" fill="currentColor">
+          <path
+            d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,16.37a86.4,86.4,0,0,1,16,3V212.67a86.4,86.4,0,0,1-16,3Zm32,9.26a87.81,87.81,0,0,1,16,10.54V195.83a87.81,87.81,0,0,1-16,10.54ZM40,128a88.11,88.11,0,0,1,80-87.63V215.63A88.11,88.11,0,0,1,40,128Zm160,50.54V77.46a87.82,87.82,0,0,1,0,101.08Z"
+          />
+        </symbol>
+        <symbol id="rail-list" viewBox="0 0 256 256" fill="currentColor">
+          <path
+            d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"
+          />
+        </symbol>
+        <symbol id="rail-moon" viewBox="0 0 256 256" fill="currentColor">
+          <path
+            d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"
+          />
+        </symbol>
+        <symbol id="rail-sun" viewBox="0 0 256 256" fill="currentColor">
+          <path
+            d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"
+          />
+        </symbol>
+        <symbol id="rail-x" viewBox="0 0 256 256" fill="currentColor">
+          <path
+            d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"
+          />
+        </symbol>
+      </svg>
+      <div class="rail-strip">
+        <a class="rail-mark" href="/">gigantic</a>
+        <button
+          type="button"
+          class="btn btn-ghost btn-icon"
+          popovertarget="rail-panel"
+          aria-label="projects"
+        >
+          <svg class="icon" aria-hidden="true"><use href="#rail-list" /></svg>
         </button>
       </div>
-    </header>
+      <div class="rail-panel" id="rail-panel" popover>
+        <div class="rail-head">
+          <a class="rail-mark" href="/">gigantic</a>
+          <button
+            type="button"
+            class="btn btn-ghost btn-icon rail-close"
+            popovertarget="rail-panel"
+            popovertargetaction="hide"
+            aria-label="close"
+          >
+            <svg class="icon" aria-hidden="true"><use href="#rail-x" /></svg>
+          </button>
+        </div>
+        <p class="eyebrow">docs</p>
+        <div class="list" role="list">
+          <a class="listrow" role="listitem" href="/routines/"
+            ><span class="listrow-name">routines</span></a
+          >
+          <a class="listrow" role="listitem" href="/sandman/"
+            ><span class="listrow-name">sandman</span></a
+          >
+          <a class="listrow" role="listitem" href="/stele/"
+            ><span class="listrow-name">stele</span></a
+          >
+          <a class="listrow" role="listitem" href="/ui/"><span class="listrow-name">ui</span></a>
+        </div>
+        <hr class="hr" />
+        <p class="eyebrow">source</p>
+        <div class="list" role="list">
+          <a class="listrow" role="listitem" href="https://github.com/jgeschwendt/claude"
+            ><span class="listrow-name">claude</span><span class="listrow-meta">↗</span></a
+          >
+          <a class="listrow" role="listitem" href="https://github.com/jgeschwendt/grove"
+            ><span class="listrow-name">grove</span><span class="listrow-meta">↗</span></a
+          >
+          <a class="listrow" role="listitem" href="https://jlg.io"
+            ><span class="listrow-name">jlg.io</span><span class="listrow-meta">↗</span></a
+          >
+          <a class="listrow" role="listitem" href="https://github.com/jgeschwendt/math-problems"
+            ><span class="listrow-name">math-problems</span><span class="listrow-meta">↗</span></a
+          >
+          <a class="listrow" role="listitem" href="https://github.com/jgeschwendt/nvim"
+            ><span class="listrow-name">nvim</span><span class="listrow-meta">↗</span></a
+          >
+          <a class="listrow" role="listitem" href="https://github.com/jgeschwendt/pty"
+            ><span class="listrow-name">pty</span><span class="listrow-meta">↗</span></a
+          >
+          <a class="listrow" role="listitem" href="https://github.com/jgeschwendt/typescript"
+            ><span class="listrow-name">typescript</span><span class="listrow-meta">↗</span></a
+          >
+          <a class="listrow" role="listitem" href="https://github.com/jgeschwendt/visor-releases"
+            ><span class="listrow-name">visor-releases</span><span class="listrow-meta">↗</span></a
+          >
+        </div>
+        <div class="rail-foot">
+          <a class="listrow" href="https://github.com/jgeschwendt"
+            ><span class="listrow-name">github</span><span class="listrow-meta">↗</span></a
+          >
+          <div class="segmented" role="group" aria-label="theme">
+            <button type="button" data-theme-set="light" aria-pressed="false" title="light">
+              <svg class="icon icon-sm" aria-hidden="true"><use href="#rail-sun" /></svg>light
+            </button>
+            <button
+              type="button"
+              data-theme-set="auto"
+              aria-pressed="true"
+              title="follow the system"
+            >
+              <svg class="icon icon-sm" aria-hidden="true"><use href="#rail-circle-half" /></svg
+              >auto
+            </button>
+            <button type="button" data-theme-set="dark" aria-pressed="false" title="dark">
+              <svg class="icon icon-sm" aria-hidden="true"><use href="#rail-moon" /></svg>dark
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
 
     <main class="site-shell" data-container>
       <header class="site-mast stack">
@@ -130,27 +211,6 @@
 
     <footer class="site-foot faint" data-container>© Joshua Geschwendt</footer>
 
-    <script>
-      /* The theme contract, verbatim from jgeschwendt/ui docs.js — same localStorage
-   key, so a theme chosen here is the theme every project page opens in. */
-      const THEME_KEY = 'ui-theme';
-      function applyTheme(mode) {
-        const root = document.documentElement;
-        if (mode === 'auto') {
-          root.removeAttribute('data-theme');
-          localStorage.removeItem(THEME_KEY);
-        } else {
-          root.dataset.theme = mode;
-          localStorage.setItem(THEME_KEY, mode);
-        }
-        for (const b of document.querySelectorAll('[data-theme-set]')) {
-          b.setAttribute('aria-pressed', String(b.dataset.themeSet === mode));
-        }
-      }
-      for (const b of document.querySelectorAll('[data-theme-set]')) {
-        b.addEventListener('click', () => applyTheme(b.dataset.themeSet));
-      }
-      applyTheme(localStorage.getItem(THEME_KEY) || 'auto');
-    </script>
+    <script src="/rail.js" defer></script>
   </body>
 </html>

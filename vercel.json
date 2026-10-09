@@ -1,17 +1,14 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
+  "functions": {
+    "api/proxy.ts": { "includeFiles": "public/{404,rail}.html" }
+  },
   "rewrites": [
-    {
-      "source": "/routines/:path(.*)",
-      "destination": "https://jgeschwendt.github.io/routines/:path"
-    },
-    {
-      "source": "/sandman/:path(.*)",
-      "destination": "https://jgeschwendt.github.io/sandman/:path"
-    },
-    { "source": "/stele/:path(.*)", "destination": "https://jgeschwendt.github.io/stele/:path" },
-    { "source": "/ui/:path(.*)", "destination": "https://jgeschwendt.github.io/ui/:path" }
+    { "source": "/routines/:path(.*)", "destination": "/api/proxy?project=routines&path=:path" },
+    { "source": "/sandman/:path(.*)", "destination": "/api/proxy?project=sandman&path=:path" },
+    { "source": "/stele/:path(.*)", "destination": "/api/proxy?project=stele&path=:path" },
+    { "source": "/ui/:path(.*)", "destination": "/api/proxy?project=ui&path=:path" }
   ],
   "trailingSlash": true
 }

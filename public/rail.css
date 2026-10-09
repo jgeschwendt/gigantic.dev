@@ -1,0 +1,135 @@
+/* rail.css — the cross-project navigation rail (public/rail.html). Loaded by the
+   landing, the 404, and every proxied project page (api/proxy.ts injects it), so it
+   styles only .rail* and the page offset; components and tokens are ui.css's.
+   Unlayered on purpose: it must beat each page's ui.css component layer. */
+
+:root {
+  --rail-strip-h: 48px;
+  --rail-w: 224px;
+}
+
+.rail-foot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space-3);
+  margin-top: auto;
+  padding-top: var(--ui-space-5);
+}
+
+.rail-foot .segmented {
+  align-self: flex-start;
+}
+
+.rail-head {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--ui-space-3);
+  min-height: 32px;
+  padding-inline: var(--ui-space-2);
+}
+
+.rail-mark {
+  color: var(--ui-accent);
+  font-size: var(--ui-text-xl);
+  font-weight: var(--ui-weight-bold);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-decoration: none;
+}
+
+/* [popover] carries UA chrome (border, padding, Canvas colours, inset: 0 with
+   auto margins); every one of those is reset here so the panel is ours in both
+   the docked and the drawer form. */
+.rail-panel {
+  background: var(--ui-surface);
+  border: 0;
+  border-inline-end: 1px solid var(--ui-border);
+  color: var(--ui-fg);
+  flex-direction: column;
+  font-family: var(--ui-font-sans);
+  font-size: var(--ui-text-md);
+  gap: var(--ui-space-1);
+  height: 100%;
+  inset: 0 auto 0 0;
+  line-height: var(--ui-leading-body);
+  margin: 0;
+  max-height: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--ui-space-4) var(--ui-space-3);
+  position: fixed;
+  width: var(--rail-w);
+}
+
+.rail-panel .eyebrow {
+  margin-top: var(--ui-space-2);
+  padding-inline: var(--ui-space-2);
+}
+
+.rail-panel .hr {
+  margin: var(--ui-space-3) var(--ui-space-2) var(--ui-space-1);
+}
+
+.rail-panel .listrow {
+  font-size: var(--ui-text-sm);
+  text-decoration: none;
+}
+
+.rail-panel .listrow-meta {
+  margin-inline-start: auto;
+}
+
+.rail-strip {
+  align-items: center;
+  background: var(--ui-surface);
+  border-bottom: 1px solid var(--ui-border);
+  display: flex;
+  height: var(--rail-strip-h);
+  inset: 0 0 auto;
+  justify-content: space-between;
+  padding-inline: var(--ui-space-4) var(--ui-space-2);
+  position: fixed;
+  z-index: 30;
+}
+
+/* docked: the panel is always shown, so the UA's
+   [popover]:not(:popover-open) { display: none } is overridden — author rules
+   outrank UA rules whatever the specificity. */
+@media (min-width: 900px) {
+  html {
+    padding-inline-start: var(--rail-w);
+  }
+
+  .rail-close,
+  .rail-strip {
+    display: none;
+  }
+
+  .rail-panel {
+    display: flex;
+    z-index: 30;
+  }
+}
+
+/* drawer: a slim fixed strip on top; the panel opens from it as a popover
+   (top layer, light-dismiss, Esc) — no script involved. */
+@media (max-width: 899.98px) {
+  html {
+    padding-block-start: var(--rail-strip-h);
+    scroll-padding-top: var(--rail-strip-h);
+  }
+
+  .rail-panel {
+    box-shadow: var(--ui-shadow-lg);
+    max-width: 85vw;
+  }
+
+  .rail-panel:popover-open {
+    display: flex;
+  }
+
+  .rail-panel::backdrop {
+    background: rgb(0 0 0 / 0.4);
+  }
+}
