@@ -2,6 +2,7 @@
 // same thing; this keeps them one list. Sources are `/<name>/:path(.*)`, not
 // `:path*`: with trailingSlash every page URL ends in `/`, and Vercel compiles
 // `:path*` strict — `^/<name>(?:/(…))?$` never matches `/<name>/` itself.
+import { getTransformedRoutes } from '@vercel/routing-utils';
 import { afterEach, describe, expect, test } from 'bun:test';
 import proxy, { inject, PROJECTS } from './api/proxy.ts';
 
@@ -57,6 +58,14 @@ test('every rewrite destination is the proxy function for that project', () => {
   for (const { destination, source } of config.rewrites) {
     const name = source.split('/')[1];
     expect(destination).toBe(`/api/proxy?project=${name}&path=:path`);
+  }
+});
+
+test('proxied pages route to the proxy, never a redirect (cleanUrls 308s every *.html)', () => {
+  const { routes } = getTransformedRoutes(config);
+  for (const path of ['/stele/', '/sandman/plates/perpetual-shift/project/Main.dc.html']) {
+    const hit = routes!.find((r) => 'src' in r && new RegExp(r.src).test(path));
+    expect(hit).toMatchObject({ dest: expect.stringMatching(/^\/api\/proxy\?/) });
   }
 });
 
