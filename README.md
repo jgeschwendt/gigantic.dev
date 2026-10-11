@@ -23,7 +23,7 @@ Joshua Geschwendt's project home: one domain in front of every project's docs.
 │   ├── site.css        # landing layout only
 │   └── ui.css          # byte-synced from jgeschwendt/ui — never edit
 ├── site.test.ts        # rail ⇔ cards ⇔ rewrites; the proxy, against a stubbed fetch
-└── vercel.json         # trailingSlash, cleanUrls, one rewrite per proxied project
+└── vercel.json         # trailingSlash, one rewrite per proxied project
 ```
 
 ## How proxying works
