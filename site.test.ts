@@ -193,6 +193,7 @@ describe('proxy handler', () => {
     ]) {
       expect((await get(q)).status).toBe(404);
     }
+    expect((await get('project=stele&path=', 'POST')).headers.get('allow')).toBe('GET, HEAD');
     expect(seen).toEqual([]);
   });
 
