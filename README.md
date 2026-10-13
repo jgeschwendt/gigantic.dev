@@ -68,7 +68,7 @@ the landing's, both linking its repo; no rewrite.
 ## Develop
 
 ```sh
-mise install && bun install && lefthook install
+mise install && bun install && hk install --mise --force
 bun test
 bun run fmt
 ```

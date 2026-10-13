@@ -1,0 +1,28 @@
+amends "package://github.com/jdx/hk/releases/download/v2.5.0/hk@2.5.0#/Config.pkl"
+// `hk install --mise --force` wires these once for every checkout of the repo
+// (worktrees share one hooks dir); --force replaces the lefthook shim it supersedes.
+hooks {
+  // Check-only: a fix step rewrites and stages the whole file, so a partly staged
+  // file would carry its unstaged hunks into the commit, and hk's only guard is
+  // `git stash`, whose stack every worktree and session shares. `bun run fmt`
+  // fixes what this reports; it reads the working tree, so CI's fmt check is the
+  // backstop for a partly staged file.
+  ["pre-commit"] {
+    steps {
+      // Every type the CI fmt check gates. --no-error-on-unmatched-pattern: a
+      // commit touching only oxfmt-ignored files (public/ui.css) would otherwise
+      // exit 2 ("Expected at least one target file").
+      ["oxfmt"] {
+        glob = "*.{css,html,js,json,md,toml,ts,yaml}"
+        check = "bunx --bun oxfmt --no-error-on-unmatched-pattern --check {{files}}"
+      }
+    }
+  }
+  ["pre-push"] {
+    steps {
+      ["test"] {
+        check = "bun test"
+      }
+    }
+  }
+}
