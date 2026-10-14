@@ -1,7 +1,10 @@
 /* rail.css — the cross-project navigation rail (public/rail.html). Loaded by the
    landing, the 404, and every proxied project page (api/proxy.ts injects it), so it
    styles only .rail* and the page offset; components and tokens are ui.css's.
-   Unlayered on purpose: it must beat each page's ui.css component layer. */
+   Unlayered on purpose: it must beat each page's ui.css component layer.
+   Breakpoint: 900px (docked ≥ 900, strip below) is docs.css's desktop constant,
+   stated once in its header comment beside 640px (phone, the shell's own) —
+   media queries cannot read custom properties, so a change there lands here too. */
 
 :root {
   --rail-strip-h: 48px;

@@ -7,8 +7,8 @@ Joshua Geschwendt's project home: one domain in front of every project's docs.
   `jgeschwendt.github.io/<name>/`, fetched by a Vercel Function.
 - One navigation rail (`public/rail.html`) on every page: the landing, the 404, and
   each proxied page, which gets it injected on the way through.
-- Every page shares jgeschwendt/ui's `ui.css`, so the proxied docs and the landing look
-  like one site.
+- Every page links jgeschwendt/ui's `ui.css` and its `docs.css` shell from `/ui/`
+  (proxied, so always latest), and the proxied docs and the landing look like one site.
 
 ```
 .
@@ -20,8 +20,7 @@ Joshua Geschwendt's project home: one domain in front of every project's docs.
 │   ├── rail.css        # rail layout and the page offset it needs
 │   ├── rail.html       # the rail partial — the one list of projects
 │   ├── rail.js         # current-project mark + theme toggle
-│   ├── site.css        # landing layout only
-│   └── ui.css          # byte-synced from jgeschwendt/ui — never edit
+│   └── site.css        # landing layout only
 ├── site.test.ts        # rail ⇔ cards ⇔ rewrites; the proxy, against a stubbed fetch
 └── vercel.json         # trailingSlash, one rewrite per proxied project
 ```

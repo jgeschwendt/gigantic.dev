@@ -14,8 +14,9 @@ build step; CI deploys through the Vercel CLI.
   fails until rail, cards, rewrites and the rail copies agree.
 - **Add a GitHub-only project:** a `.listrow` in the rail's source list and one in the
   landing's; no rewrite.
-- **`public/ui.css` is byte-synced from jgeschwendt/ui — never edit it here.** To sync, copy
-  ui's `ui.css` over it and bump the sha in the provenance comment in both HTML pages.
-  Landing layout belongs in `public/site.css`; rail layout in `public/rail.css`.
+- **The stylesheets are linked, never copied:** `index.html` and `404.html` link
+  `/ui/ui.css` then `/ui/docs.css` (jgeschwendt/ui, proxied, latest) before `site.css`.
+  Landing-only layout belongs in `public/site.css`; rail layout in `public/rail.css`, whose
+  breakpoint cites docs.css's 900px constant.
 - `api/proxy.ts` reads `rail.html` and `404.html` at cold start; `vercel.json`'s
   `functions.includeFiles` ships them — keep the two in step if either moves.

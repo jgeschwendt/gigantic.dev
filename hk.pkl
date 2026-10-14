@@ -10,7 +10,7 @@ hooks {
   ["pre-commit"] {
     steps {
       // Every type the CI fmt check gates. --no-error-on-unmatched-pattern: a
-      // commit touching only oxfmt-ignored files (public/ui.css) would otherwise
+      // commit touching only oxfmt-ignored files (public/rail.html) would otherwise
       // exit 2 ("Expected at least one target file").
       ["oxfmt"] {
         glob = "*.{css,html,js,json,md,toml,ts,yaml}"
