@@ -8,9 +8,10 @@
   text-decoration: none;
 }
 
+/* the foot rides the shell's gutters (.docs-shell) but not its block padding */
 .site-foot {
   font-size: var(--ui-text-xs);
-  padding-bottom: 3rem;
+  padding-block: 0 3rem;
 }
 
 .site-grid {
