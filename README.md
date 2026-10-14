@@ -17,10 +17,10 @@ Joshua Geschwendt's project home: one domain in front of every project's docs.
 ├── public/
 │   ├── 404.html        # served for any unmatched path and any upstream 404
 │   ├── index.html      # the landing: project cards + source list
+│   ├── page.css        # landing layout only
 │   ├── rail.css        # rail layout and the page offset it needs
 │   ├── rail.html       # the rail partial — the one list of projects
-│   ├── rail.js         # current-project mark + theme toggle
-│   └── site.css        # landing layout only
+│   └── rail.js         # current-project mark + theme toggle
 ├── site.test.ts        # rail ⇔ cards ⇔ rewrites; the proxy, against a stubbed fetch
 └── vercel.json         # trailingSlash, one rewrite per proxied project
 ```

@@ -15,8 +15,8 @@ build step; CI deploys through the Vercel CLI.
 - **Add a GitHub-only project:** a `.listrow` in the rail's source list and one in the
   landing's; no rewrite.
 - **The stylesheets are linked, never copied:** `index.html` and `404.html` link
-  `/ui/ui.css` then `/ui/docs.css` (jgeschwendt/ui, proxied, latest) before `site.css`.
-  Landing-only layout belongs in `public/site.css`; rail layout in `public/rail.css`, whose
+  `/ui/ui.css` then `/ui/docs.css` (jgeschwendt/ui, proxied, latest) before `page.css`.
+  Landing-only layout belongs in `public/page.css`; rail layout in `public/rail.css`, whose
   breakpoint cites docs.css's 900px constant.
 - `api/proxy.ts` reads `rail.html` and `404.html` at cold start; `vercel.json`'s
   `functions.includeFiles` ships them — keep the two in step if either moves.
