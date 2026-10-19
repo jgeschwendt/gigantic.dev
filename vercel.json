@@ -4,6 +4,7 @@
     "api/proxy.ts": { "includeFiles": "public/{404,rail}.html" }
   },
   "rewrites": [
+    { "source": "/pty/:path(.*)", "destination": "/api/proxy?project=pty&path=:path" },
     { "source": "/routines/:path(.*)", "destination": "/api/proxy?project=routines&path=:path" },
     { "source": "/sandman/:path(.*)", "destination": "/api/proxy?project=sandman&path=:path" },
     { "source": "/stele/:path(.*)", "destination": "/api/proxy?project=stele&path=:path" },
