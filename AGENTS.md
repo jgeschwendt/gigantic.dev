@@ -23,8 +23,9 @@ each proxied page — carries the one rail and looks like one site.
   `functions.includeFiles` ships them — keep the two in step if either moves.
 - Caching: `s-maxage=600, stale-while-revalidate=86400`; Vercel's CDN keeps responses and
   sends browsers a bare `public`.
-- HTML gets `rail.css` before `</head>` and the rail plus `rail.js` before `</body>`;
-  anything else streams through untouched.
+- HTML gets `rail.css` before `</head>`, and a `.rail-repo` footer linking
+  `github.com/jgeschwendt/<name>`, the rail and `rail.js` before `</body>`; anything else
+  streams through untouched.
 - Pages redirects are re-homed onto this host; an upstream 404 serves `public/404.html`.
 - The Pages sites use relative asset hrefs, so a proxied page resolves its stylesheet and
   links under `/<name>/`.

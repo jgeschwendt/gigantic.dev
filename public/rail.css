@@ -1,6 +1,7 @@
 /* rail.css — the cross-project navigation rail (public/rail.html). Loaded by the
-   landing, the 404, and every proxied project page (api/proxy.ts injects it), so it
-   styles only .rail* and the page offset; components and tokens are ui.css's.
+   landing, the 404, and every proxied project page (api/proxy.ts injects it, plus
+   the .rail-repo foot), so it styles only .rail* and the page offset; components
+   and tokens are ui.css's.
    Unlayered on purpose: it must beat each page's ui.css component layer.
    Breakpoint: 900px (docked ≥ 900, strip below) is docs.css's desktop constant,
    stated once in its header comment beside 640px (phone, the shell's own) —
@@ -81,6 +82,23 @@
 
 .rail-panel .listrow-meta {
   margin-inline-start: auto;
+}
+
+.rail-repo {
+  font-family: var(--ui-font-mono);
+  font-size: var(--ui-text-xs);
+  margin-top: var(--ui-space-7);
+  padding: var(--ui-space-4) var(--ui-space-4) var(--ui-space-6);
+  text-align: center;
+}
+
+.rail-repo-link {
+  color: var(--ui-fg-muted);
+  text-decoration: none;
+}
+
+.rail-repo-link:hover {
+  color: var(--ui-fg);
 }
 
 .rail-strip {

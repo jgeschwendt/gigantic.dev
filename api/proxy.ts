@@ -5,13 +5,16 @@
 // https://vercel.com/docs/functions/runtimes/node-js
 //
 // Every `/<project>/:path(.*)` rewrite in vercel.json lands here. The page is fetched
-// from GitHub Pages; HTML gets the shared rail injected, everything else streams through.
+// from GitHub Pages; HTML gets the shared rail and the project's repo link injected,
+// everything else streams through.
 import { readFileSync } from 'node:fs';
 
 const PAGES = 'https://jgeschwendt.github.io';
 const CACHE = 'public, s-maxage=600, stale-while-revalidate=86400';
 const RAIL_CSS = '<link rel="stylesheet" href="/rail.css" />\n';
 const RAIL_JS = '<script src="/rail.js" defer></script>\n';
+const repo = (project: string) =>
+  `<footer class="rail-repo"><a class="rail-repo-link" href="https://github.com/jgeschwendt/${project}">github ↗</a></footer>\n`;
 
 // Read at cold start. vercel.json's `functions.includeFiles` ships both files beside
 // the bundle, at the same repo-relative path this URL resolves to.
@@ -24,16 +27,22 @@ export const PROJECTS: ReadonlySet<string> = new Set(
   Array.from(RAIL.matchAll(/href="\/([a-z0-9.-]+)\/"/g), (m) => m[1]!),
 );
 
-/** Insert the rail's stylesheet before `</head>` and the rail plus its script before
- * `</body>`. A page missing either tag (ui's meta-refresh stub) or already carrying a
- * rail is returned unchanged. */
-export function inject(html: string, rail: string): string {
+/** Insert the rail's stylesheet before `</head>`, and `project`'s repo link, the rail
+ * and its script before `</body>`. A page missing either tag (ui's meta-refresh stub)
+ * or already carrying a rail is returned unchanged. */
+export function inject(html: string, rail: string, project: string): string {
   const lower = html.toLowerCase();
   const head = lower.indexOf('</head>');
   const body = lower.lastIndexOf('</body>');
   if (head < 0 || body < head || html.includes('<nav class="rail"')) return html;
   return (
-    html.slice(0, head) + RAIL_CSS + html.slice(head, body) + rail + RAIL_JS + html.slice(body)
+    html.slice(0, head) +
+    RAIL_CSS +
+    html.slice(head, body) +
+    repo(project) +
+    rail +
+    RAIL_JS +
+    html.slice(body)
   );
 }
 
@@ -85,7 +94,7 @@ export default {
     }
 
     if (method === 'GET' && type?.startsWith('text/html')) {
-      return new Response(inject(await res.text(), RAIL), { headers, status: res.status });
+      return new Response(inject(await res.text(), RAIL, project), { headers, status: res.status });
     }
     return new Response(res.body, { headers, status: res.status });
   },
