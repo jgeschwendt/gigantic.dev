@@ -87,40 +87,54 @@ for (const page of ['public/index.html', 'public/404.html']) {
 describe('inject', () => {
   const page = '<html><head><title>t</title></head><body><p>x</p></body></html>';
 
-  test('stylesheet before </head>, rail and script before </body>', () => {
-    expect(inject(page, '<nav class="rail"></nav>\n')).toBe(
+  const foot = (p: string) =>
+    `<footer class="rail-repo"><a class="rail-repo-link" href="https://github.com/jgeschwendt/${p}">github ↗</a></footer>\n`;
+
+  test('stylesheet before </head>; repo link, rail and script before </body>', () => {
+    expect(inject(page, '<nav class="rail"></nav>\n', 'stele')).toBe(
       '<html><head><title>t</title><link rel="stylesheet" href="/rail.css" />\n</head>' +
-        '<body><p>x</p><nav class="rail"></nav>\n<script src="/rail.js" defer></script>\n' +
-        '</body></html>',
+        `<body><p>x</p>${foot('stele')}<nav class="rail"></nav>\n` +
+        '<script src="/rail.js" defer></script>\n</body></html>',
+    );
+  });
+
+  test("the repo link is the project's", () => {
+    expect(inject(page, 'R', 'sandman')).toContain(
+      '<a class="rail-repo-link" href="https://github.com/jgeschwendt/sandman">github ↗</a>',
     );
   });
 
   test('changes nothing else', () => {
-    const out = inject(page, 'R');
+    const out = inject(page, 'R', 'pty');
     const stripped = out
       .replace('<link rel="stylesheet" href="/rail.css" />\n', '')
-      .replace('R<script src="/rail.js" defer></script>\n', '');
+      .replace(`${foot('pty')}R<script src="/rail.js" defer></script>\n`, '');
     expect(stripped).toBe(page);
   });
 
   test('case-insensitive tags; injects once', () => {
     const upper = '<HEAD></HEAD><BODY></BODY>';
-    const once = inject(upper, '<nav class="rail"></nav>');
+    const once = inject(upper, '<nav class="rail"></nav>', 'ui');
     expect(once).toContain('rail.css" />\n</HEAD>');
     expect(once).toContain(
-      '<nav class="rail"></nav><script src="/rail.js" defer></script>\n</BODY>',
+      `${foot('ui')}<nav class="rail"></nav><script src="/rail.js" defer></script>\n</BODY>`,
     );
-    expect(inject(once, '<nav class="rail"></nav>')).toBe(once);
+    expect(inject(once, '<nav class="rail"></nav>', 'ui')).toBe(once);
   });
 
   test('a page without </head> or </body> passes through (ui/ redirect stub)', () => {
     const stub = '<!doctype html>\n<meta http-equiv="refresh" content="0; url=docs/" />\n';
-    expect(inject(stub, rail)).toBe(stub);
+    expect(inject(stub, rail, 'ui')).toBe(stub);
+  });
+
+  test('a page with </head> but no </body> is untouched, footer included', () => {
+    const open = '<html><head></head><body><p>x</p>';
+    expect(inject(open, rail, 'stele')).toBe(open);
   });
 
   test('non-HTML is not its job: css text passes through untouched', () => {
     const css = '.a { color: red }\n';
-    expect(inject(css, rail)).toBe(css);
+    expect(inject(css, rail, 'stele')).toBe(css);
   });
 });
 
@@ -153,7 +167,7 @@ describe('proxy handler', () => {
     expect(res.headers.get('cache-control')).toBe(
       'public, s-maxage=600, stale-while-revalidate=86400',
     );
-    expect(await res.text()).toBe(inject('<head></head><body></body>', rail));
+    expect(await res.text()).toBe(inject('<head></head><body></body>', rail, 'stele'));
   });
 
   test('non-HTML streams through byte-identical', async () => {
