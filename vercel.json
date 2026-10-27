@@ -5,6 +5,7 @@
   },
   "rewrites": [
     { "source": "/grove/:path(.*)", "destination": "/api/proxy?project=grove&path=:path" },
+    { "source": "/hotswap/:path(.*)", "destination": "/api/proxy?project=hotswap&path=:path" },
     { "source": "/pty/:path(.*)", "destination": "/api/proxy?project=pty&path=:path" },
     { "source": "/routines/:path(.*)", "destination": "/api/proxy?project=routines&path=:path" },
     { "source": "/sandman/:path(.*)", "destination": "/api/proxy?project=sandman&path=:path" },
